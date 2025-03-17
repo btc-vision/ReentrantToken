@@ -1,0 +1,41 @@
+{
+    "functions": [
+        {
+            "name": "mint",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "returnVal1",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "setCallback",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "callback",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "returnVal1",
+                    "type": "BOOL"
+                }
+            ]
+        }
+    ],
+    "events": []
+}
