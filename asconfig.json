@@ -17,7 +17,6 @@
             "runtime": "stub",
             "memoryBase": 0,
             "initialMemory": 1,
-            "maximumMemory": 512,
             "bindings": "esm",
             "exportStart": "start",
             "use": [
