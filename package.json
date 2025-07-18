@@ -4,14 +4,14 @@
     "description": "OP_20 example smart contract",
     "main": "index.js",
     "scripts": {
-        "build": "asc src/index.ts --target release --measure --uncheckedBehavior never"
+        "build": "asc src/index.ts --target release --measure --uncheckedBehavior never && copy .\\build\\*.wasm ..\\opnet-unit-test\\bytecode\\ /Y"
     },
     "author": "BlobMaster41",
     "license": "MIT",
     "devDependencies": {
-        "@types/node": "^22.13.8",
-        "assemblyscript": "^0.27.34",
-        "prettier": "^3.5.3"
+        "@types/node": "^24.0.7",
+        "assemblyscript": "^0.28.2",
+        "prettier": "^3.6.2"
     },
     "keywords": [
         "bitcoin",
@@ -26,14 +26,14 @@
     "homepage": "https://opnet.org",
     "type": "module",
     "dependencies": {
-        "@assemblyscript/loader": "^0.27.35",
+        "@assemblyscript/loader": "^0.28.2",
         "@btc-vision/as-bignum": "^0.0.5",
-        "@btc-vision/btc-runtime": "^1.5.8",
-        "@btc-vision/opnet-transform": "^0.0.5",
-        "@eslint/js": "^9.22.0",
+        "@btc-vision/btc-runtime": "^1.8.1",
+        "@btc-vision/opnet-transform": "^0.1.6",
+        "@eslint/js": "^9.29.0",
         "gulplog": "^2.2.0",
         "ts-node": "^10.9.2",
-        "typescript": "^5.8.2",
-        "typescript-eslint": "^8.26.1"
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.35.0"
     }
 }

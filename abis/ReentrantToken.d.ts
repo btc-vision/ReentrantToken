@@ -4,6 +4,15 @@ import { CallResult, OPNetEvent, IOP_NETContract } from 'opnet';
 // ------------------------------------------------------------------
 // Event Definitions
 // ------------------------------------------------------------------
+export type MintEvent = {
+    readonly address: Address;
+    readonly amount: bigint;
+};
+export type TransferEvent = {
+    readonly from: Address;
+    readonly to: Address;
+    readonly amount: bigint;
+};
 
 // ------------------------------------------------------------------
 // Call Results
@@ -14,9 +23,9 @@ import { CallResult, OPNetEvent, IOP_NETContract } from 'opnet';
  */
 export type Mint = CallResult<
     {
-        returnVal1: boolean;
+        success: boolean;
     },
-    OPNetEvent<never>[]
+    OPNetEvent<MintEvent>[]
 >;
 
 /**
@@ -24,9 +33,19 @@ export type Mint = CallResult<
  */
 export type SetCallback = CallResult<
     {
-        returnVal1: boolean;
+        success: boolean;
     },
     OPNetEvent<never>[]
+>;
+
+/**
+ * @description Represents the result of the transfer function call.
+ */
+export type Transfer = CallResult<
+    {
+        success: boolean;
+    },
+    OPNetEvent<TransferEvent>[]
 >;
 
 // ------------------------------------------------------------------
@@ -34,5 +53,6 @@ export type SetCallback = CallResult<
 // ------------------------------------------------------------------
 export interface IReentrantToken extends IOP_NETContract {
     mint(address: Address, amount: bigint): Promise<Mint>;
-    setCallback(callback: string): Promise<SetCallback>;
+    setCallback(value: string): Promise<SetCallback>;
+    transfer(to: Address, amount: bigint): Promise<Transfer>;
 }

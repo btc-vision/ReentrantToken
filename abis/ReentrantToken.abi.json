@@ -15,7 +15,7 @@
             ],
             "outputs": [
                 {
-                    "name": "returnVal1",
+                    "name": "success",
                     "type": "BOOL"
                 }
             ]
@@ -25,17 +25,70 @@
             "type": "Function",
             "inputs": [
                 {
-                    "name": "callback",
+                    "name": "value",
                     "type": "STRING"
                 }
             ],
             "outputs": [
                 {
-                    "name": "returnVal1",
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "transfer",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "to",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
                     "type": "BOOL"
                 }
             ]
         }
     ],
-    "events": []
+    "events": [
+        {
+            "name": "Mint",
+            "values": [
+                {
+                    "name": "address",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "Transfer",
+            "values": [
+                {
+                    "name": "from",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "to",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ],
+            "type": "Event"
+        }
+    ]
 }
