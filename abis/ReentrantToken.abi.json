@@ -13,12 +13,7 @@
                     "type": "UINT256"
                 }
             ],
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "BOOL"
-                }
-            ]
+            "outputs": []
         },
         {
             "name": "setCallback",
@@ -29,15 +24,10 @@
                     "type": "STRING"
                 }
             ],
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "BOOL"
-                }
-            ]
+            "outputs": []
         },
         {
-            "name": "transfer",
+            "name": "safeTransfer",
             "type": "Function",
             "inputs": [
                 {
@@ -47,22 +37,21 @@
                 {
                     "name": "amount",
                     "type": "UINT256"
+                },
+                {
+                    "name": "data",
+                    "type": "BYTES"
                 }
             ],
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "BOOL"
-                }
-            ]
+            "outputs": []
         }
     ],
     "events": [
         {
-            "name": "Mint",
+            "name": "Minted",
             "values": [
                 {
-                    "name": "address",
+                    "name": "to",
                     "type": "ADDRESS"
                 },
                 {
@@ -73,8 +62,12 @@
             "type": "Event"
         },
         {
-            "name": "Transfer",
+            "name": "Transferred",
             "values": [
+                {
+                    "name": "operator",
+                    "type": "ADDRESS"
+                },
                 {
                     "name": "from",
                     "type": "ADDRESS"
