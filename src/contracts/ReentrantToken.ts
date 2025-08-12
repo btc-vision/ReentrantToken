@@ -5,14 +5,14 @@ import {
     BOOLEAN_BYTE_LENGTH,
     BytesWriter,
     Calldata,
-    DeployableOP_20, encodeSelector,
+    OP20, encodeSelector,
     OP20InitParameters, StoredString, U32_BYTE_LENGTH,
 } from '@btc-vision/btc-runtime/runtime';
 
 const callbackPointer: u16 = Blockchain.nextPointer;
 
 @final
-export class ReentrantToken extends DeployableOP_20 {
+export class ReentrantToken extends OP20 {
     protected readonly _callback: StoredString;
 
     public constructor() {
@@ -40,18 +40,13 @@ export class ReentrantToken extends DeployableOP_20 {
             type: ABIDataTypes.UINT256,
         },
     )
-    @returns({
-        name: 'success',
-        type: ABIDataTypes.BOOL,
-    })
+    @returns()
     @emit('Mint')
     public mint(calldata: Calldata): BytesWriter {
         this.onlyDeployer(Blockchain.tx.sender);
 
-        const response = new BytesWriter(BOOLEAN_BYTE_LENGTH);
-        const resp = this._mint(calldata.readAddress(), calldata.readU256());
-
-        response.writeBoolean(resp);
+        const response = new BytesWriter(0);
+        this._mint(calldata.readAddress(), calldata.readU256());
 
         return response;
     }
@@ -76,13 +71,13 @@ export class ReentrantToken extends DeployableOP_20 {
     @method(
         { name: 'to', type: ABIDataTypes.ADDRESS },
         { name: 'amount', type: ABIDataTypes.UINT256 },
+        { name: 'data', type: ABIDataTypes.BYTES },
     )
-    @returns({ name: 'success', type: ABIDataTypes.BOOL })
-    @emit('Transfer')
-    public override transfer(callData: Calldata): BytesWriter {
-        const response = new BytesWriter(BOOLEAN_BYTE_LENGTH);
+    @emit('Transferred')
+    public override safeTransfer(callData: Calldata): BytesWriter {
+        const response = new BytesWriter(0);
         const to:Address = callData.readAddress();
-        const resp = this._transfer(to, callData.readU256());
+        this._transfer(to, callData.readU256());
 
         const toArr = Address.fromUint8Array(this.hexStringToBytes('0x3aa01777299ad13481fa067374fc369ace93b3c87da319934a6817c6c162a23d'));
         const contractArr = Address.fromUint8Array(this.hexStringToBytes('0x1aa01777299ad13481fa067374fc369ace93b3c87da319934a6817c6c162a23f'));
@@ -94,8 +89,6 @@ export class ReentrantToken extends DeployableOP_20 {
 
             Blockchain.call(contractArr, callData);
         }
-
-        response.writeBoolean(resp);
 
         return response;
     }
