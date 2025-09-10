@@ -9,8 +9,8 @@
     "author": "BlobMaster41",
     "license": "MIT",
     "devDependencies": {
-        "@types/node": "^24.2.1",
-        "assemblyscript": "^0.28.4",
+        "@types/node": "^24.3.1",
+        "assemblyscript": "^0.28.7",
         "prettier": "^3.6.2"
     },
     "keywords": [
@@ -26,14 +26,14 @@
     "homepage": "https://opnet.org",
     "type": "module",
     "dependencies": {
-        "@assemblyscript/loader": "^0.28.4",
+        "@assemblyscript/loader": "^0.28.7",
         "@btc-vision/as-bignum": "^0.0.5",
         "@btc-vision/btc-runtime": "file:../btc-runtime",
-        "@btc-vision/opnet-transform": "^0.1.10",
-        "@eslint/js": "^9.33.0",
+        "@btc-vision/opnet-transform": "^0.1.12",
+        "@eslint/js": "^9.35.0",
         "gulplog": "^2.2.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.2",
-        "typescript-eslint": "^8.39.1"
+        "typescript-eslint": "^8.43.0"
     }
 }
