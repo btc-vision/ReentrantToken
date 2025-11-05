@@ -25,7 +25,9 @@ export class ReentrantToken extends OP20 {
     }
 
     public override onDeployment(_calldata: Calldata): void {
-        const maxSupply: u256 = u256.fromString('1000000000000000000000000000000000000000000000000000000');
+        const maxSupply: u256 = u256.fromString(
+            '1000000000000000000000000000000000000000000000000000000',
+        );
         const decimals: u8 = 18;
         const name: string = 'BobTheNoob2';
         const symbol: string = 'BOB2';
@@ -50,12 +52,10 @@ export class ReentrantToken extends OP20 {
         return new BytesWriter(0);
     }
 
-    @method(
-        {
-            name: 'value',
-            type: ABIDataTypes.STRING,
-        },
-    )
+    @method({
+        name: 'value',
+        type: ABIDataTypes.STRING,
+    })
     public setCallback(calldata: Calldata): BytesWriter {
         this._callback.value = calldata.readStringWithLength();
         return new BytesWriter(0);
@@ -71,10 +71,18 @@ export class ReentrantToken extends OP20 {
         const to: Address = callData.readAddress();
         const amount: u256 = callData.readU256();
         const data: Uint8Array = callData.readBytesWithLength();
-        this._transfer(this.address, to, amount, data);
+        this._safeTransfer(this.address, to, amount, data);
 
-        const toArr = Address.fromUint8Array(this.hexStringToBytes('0x3aa01777299ad13481fa067374fc369ace93b3c87da319934a6817c6c162a23d'));
-        const contractArr = Address.fromUint8Array(this.hexStringToBytes('0x1aa01777299ad13481fa067374fc369ace93b3c87da319934a6817c6c162a23f'));
+        const toArr = Address.fromUint8Array(
+            this.hexStringToBytes(
+                '0x3aa01777299ad13481fa067374fc369ace93b3c87da319934a6817c6c162a23d',
+            ),
+        );
+        const contractArr = Address.fromUint8Array(
+            this.hexStringToBytes(
+                '0x1aa01777299ad13481fa067374fc369ace93b3c87da319934a6817c6c162a23f',
+            ),
+        );
 
         if (to.equals(toArr)) {
             const callData = new BytesWriter(U32_BYTE_LENGTH + ADDRESS_BYTE_LENGTH);
@@ -89,7 +97,7 @@ export class ReentrantToken extends OP20 {
 
     private hexStringToBytes(hex: string): Uint8Array {
         // Remove 0x prefix if present
-        let str = hex.startsWith('0x') ? hex.substring(2) : hex;
+        const str = hex.startsWith('0x') ? hex.substring(2) : hex;
 
         const len = str.length;
         const bytes = new Uint8Array(len / 2);
@@ -104,11 +112,14 @@ export class ReentrantToken extends OP20 {
     }
 
     private charCodeToHex(charCode: i32): u8 {
-        if (charCode >= 48 && charCode <= 57) {  // '0'-'9'
+        if (charCode >= 48 && charCode <= 57) {
+            // '0'-'9'
             return (charCode - 48) as u8;
-        } else if (charCode >= 65 && charCode <= 70) {  // 'A'-'F'
+        } else if (charCode >= 65 && charCode <= 70) {
+            // 'A'-'F'
             return (charCode - 55) as u8;
-        } else if (charCode >= 97 && charCode <= 102) {  // 'a'-'f'
+        } else if (charCode >= 97 && charCode <= 102) {
+            // 'a'-'f'
             return (charCode - 87) as u8;
         } else {
             return 0 as u8; // Invalid hex character

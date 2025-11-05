@@ -23,26 +23,60 @@
             ]
         },
         {
-            "name": "icon",
+            "name": "maxSupply",
+            "type": "Function",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "maxSupply",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "collectionInfo",
             "type": "Function",
             "inputs": [],
             "outputs": [
                 {
                     "name": "icon",
                     "type": "STRING"
+                },
+                {
+                    "name": "banner",
+                    "type": "STRING"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING"
+                },
+                {
+                    "name": "website",
+                    "type": "STRING"
                 }
             ]
         },
         {
-            "name": "decimals",
+            "name": "tokenURI",
             "type": "Function",
-            "inputs": [],
+            "inputs": [
+                {
+                    "name": "tokenId",
+                    "type": "UINT256"
+                }
+            ],
             "outputs": [
                 {
-                    "name": "decimals",
-                    "type": "UINT8"
+                    "name": "uri",
+                    "type": "STRING"
                 }
             ]
+        },
+        {
+            "name": "changeMetadata",
+            "type": "Function",
+            "inputs": [],
+            "outputs": []
         },
         {
             "name": "totalSupply",
@@ -52,28 +86,6 @@
                 {
                     "name": "totalSupply",
                     "type": "UINT256"
-                }
-            ]
-        },
-        {
-            "name": "maximumSupply",
-            "type": "Function",
-            "inputs": [],
-            "outputs": [
-                {
-                    "name": "maximumSupply",
-                    "type": "UINT256"
-                }
-            ]
-        },
-        {
-            "name": "domainSeparator",
-            "type": "Function",
-            "inputs": [],
-            "outputs": [
-                {
-                    "name": "domainSeparator",
-                    "type": "BYTES32"
                 }
             ]
         },
@@ -94,74 +106,20 @@
             ]
         },
         {
-            "name": "nonceOf",
+            "name": "ownerOf",
             "type": "Function",
             "inputs": [
                 {
-                    "name": "owner",
-                    "type": "ADDRESS"
+                    "name": "tokenId",
+                    "type": "UINT256"
                 }
             ],
             "outputs": [
                 {
-                    "name": "nonce",
-                    "type": "UINT256"
-                }
-            ]
-        },
-        {
-            "name": "allowance",
-            "type": "Function",
-            "inputs": [
-                {
                     "name": "owner",
                     "type": "ADDRESS"
-                },
-                {
-                    "name": "spender",
-                    "type": "ADDRESS"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "remaining",
-                    "type": "UINT256"
                 }
             ]
-        },
-        {
-            "name": "transfer",
-            "type": "Function",
-            "inputs": [
-                {
-                    "name": "to",
-                    "type": "ADDRESS"
-                },
-                {
-                    "name": "amount",
-                    "type": "UINT256"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "transferFrom",
-            "type": "Function",
-            "inputs": [
-                {
-                    "name": "from",
-                    "type": "ADDRESS"
-                },
-                {
-                    "name": "to",
-                    "type": "ADDRESS"
-                },
-                {
-                    "name": "amount",
-                    "type": "UINT256"
-                }
-            ],
-            "outputs": []
         },
         {
             "name": "safeTransfer",
@@ -172,7 +130,7 @@
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "amount",
+                    "name": "tokenId",
                     "type": "UINT256"
                 },
                 {
@@ -195,7 +153,7 @@
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "amount",
+                    "name": "tokenId",
                     "type": "UINT256"
                 },
                 {
@@ -206,37 +164,48 @@
             "outputs": []
         },
         {
-            "name": "increaseAllowance",
+            "name": "approve",
             "type": "Function",
             "inputs": [
                 {
-                    "name": "spender",
+                    "name": "operator",
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "amount",
+                    "name": "tokenId",
                     "type": "UINT256"
                 }
             ],
             "outputs": []
         },
         {
-            "name": "decreaseAllowance",
+            "name": "getApproved",
             "type": "Function",
             "inputs": [
                 {
-                    "name": "spender",
-                    "type": "ADDRESS"
-                },
-                {
-                    "name": "amount",
+                    "name": "tokenId",
                     "type": "UINT256"
                 }
             ],
             "outputs": []
         },
         {
-            "name": "increaseAllowanceBySignature",
+            "name": "setApprovalForAll",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "operator",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "approved",
+                    "type": "BOOL"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "isApprovedForAll",
             "type": "Function",
             "inputs": [
                 {
@@ -244,11 +213,31 @@
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "spender",
+                    "name": "operator",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "approved",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "approveBySignature",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "owner",
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "amount",
+                    "name": "operator",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "tokenId",
                     "type": "UINT256"
                 },
                 {
@@ -263,7 +252,7 @@
             "outputs": []
         },
         {
-            "name": "decreaseAllowanceBySignature",
+            "name": "setApprovalForAllBySignature",
             "type": "Function",
             "inputs": [
                 {
@@ -271,12 +260,12 @@
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "spender",
+                    "name": "operator",
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "amount",
-                    "type": "UINT256"
+                    "name": "approved",
+                    "type": "BOOL"
                 },
                 {
                     "name": "deadline",
@@ -294,8 +283,66 @@
             "type": "Function",
             "inputs": [
                 {
-                    "name": "amount",
+                    "name": "tokenId",
                     "type": "UINT256"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "domainSeparator",
+            "type": "Function",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "domainSeparator",
+                    "type": "BYTES32"
+                }
+            ]
+        },
+        {
+            "name": "tokenOfOwnerByIndex",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "index",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "tokenId",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getApproveNonce",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "nonce",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "setBaseURI",
+            "type": "Function",
+            "inputs": [
+                {
+                    "name": "baseURI",
+                    "type": "STRING"
                 }
             ],
             "outputs": []
@@ -318,8 +365,16 @@
                     "type": "STRING"
                 },
                 {
-                    "name": "decimals",
-                    "type": "UINT8"
+                    "name": "banner",
+                    "type": "STRING"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING"
+                },
+                {
+                    "name": "website",
+                    "type": "STRING"
                 },
                 {
                     "name": "totalSupply",
@@ -374,14 +429,32 @@
             "type": "Event"
         },
         {
-            "name": "Burned",
+            "name": "ApprovedForAll",
             "values": [
                 {
-                    "name": "from",
+                    "name": "account",
                     "type": "ADDRESS"
                 },
                 {
-                    "name": "amount",
+                    "name": "operator",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "approved",
+                    "type": "BOOL"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "URI",
+            "values": [
+                {
+                    "name": "value",
+                    "type": "STRING"
+                },
+                {
+                    "name": "id",
                     "type": "UINT256"
                 }
             ],

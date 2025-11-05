@@ -13,7 +13,7 @@ export type TransferredEvent = {
 export type ApprovedEvent = {
     readonly owner: Address;
     readonly spender: Address;
-    readonly value: bigint;
+    readonly amount: bigint;
 };
 export type BurnedEvent = {
     readonly from: Address;
@@ -40,6 +40,16 @@ export type Name = CallResult<
 export type Symbol = CallResult<
     {
         symbol: string;
+    },
+    OPNetEvent<never>[]
+>;
+
+/**
+ * @description Represents the result of the icon function call.
+ */
+export type Icon = CallResult<
+    {
+        icon: string;
     },
     OPNetEvent<never>[]
 >;
@@ -115,6 +125,16 @@ export type Allowance = CallResult<
 >;
 
 /**
+ * @description Represents the result of the transfer function call.
+ */
+export type Transfer = CallResult<{}, OPNetEvent<TransferredEvent>[]>;
+
+/**
+ * @description Represents the result of the transferFrom function call.
+ */
+export type TransferFrom = CallResult<{}, OPNetEvent<TransferredEvent>[]>;
+
+/**
  * @description Represents the result of the safeTransfer function call.
  */
 export type SafeTransfer = CallResult<{}, OPNetEvent<TransferredEvent>[]>;
@@ -149,12 +169,28 @@ export type DecreaseAllowanceBySignature = CallResult<{}, OPNetEvent<ApprovedEve
  */
 export type Burn = CallResult<{}, OPNetEvent<BurnedEvent>[]>;
 
+/**
+ * @description Represents the result of the metadata function call.
+ */
+export type Metadata = CallResult<
+    {
+        name: string;
+        symbol: string;
+        icon: string;
+        decimals: number;
+        totalSupply: bigint;
+        domainSeparator: Uint8Array;
+    },
+    OPNetEvent<never>[]
+>;
+
 // ------------------------------------------------------------------
 // IOP20
 // ------------------------------------------------------------------
 export interface IOP20 extends IOP_NETContract {
     name(): Promise<Name>;
     symbol(): Promise<Symbol>;
+    icon(): Promise<Icon>;
     decimals(): Promise<Decimals>;
     totalSupply(): Promise<TotalSupply>;
     maximumSupply(): Promise<MaximumSupply>;
@@ -162,6 +198,8 @@ export interface IOP20 extends IOP_NETContract {
     balanceOf(owner: Address): Promise<BalanceOf>;
     nonceOf(owner: Address): Promise<NonceOf>;
     allowance(owner: Address, spender: Address): Promise<Allowance>;
+    transfer(to: Address, amount: bigint): Promise<Transfer>;
+    transferFrom(from: Address, to: Address, amount: bigint): Promise<TransferFrom>;
     safeTransfer(to: Address, amount: bigint, data: Uint8Array): Promise<SafeTransfer>;
     safeTransferFrom(
         from: Address,
@@ -186,4 +224,5 @@ export interface IOP20 extends IOP_NETContract {
         signature: Uint8Array,
     ): Promise<DecreaseAllowanceBySignature>;
     burn(amount: bigint): Promise<Burn>;
+    metadata(): Promise<Metadata>;
 }
