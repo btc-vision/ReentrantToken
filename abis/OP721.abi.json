@@ -230,7 +230,11 @@
             "inputs": [
                 {
                     "name": "owner",
-                    "type": "ADDRESS"
+                    "type": "BYTES32"
+                },
+                {
+                    "name": "ownerTweakedPublicKey",
+                    "type": "BYTES32"
                 },
                 {
                     "name": "operator",
@@ -257,7 +261,11 @@
             "inputs": [
                 {
                     "name": "owner",
-                    "type": "ADDRESS"
+                    "type": "BYTES32"
+                },
+                {
+                    "name": "ownerTweakedPublicKey",
+                    "type": "BYTES32"
                 },
                 {
                     "name": "operator",

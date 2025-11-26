@@ -244,14 +244,16 @@ export interface IOP721 extends IOP_NETContract {
     setApprovalForAll(operator: Address, approved: boolean): Promise<SetApprovalForAll>;
     isApprovedForAll(owner: Address, operator: Address): Promise<IsApprovedForAll>;
     approveBySignature(
-        owner: Address,
+        owner: Uint8Array,
+        ownerTweakedPublicKey: Uint8Array,
         operator: Address,
         tokenId: bigint,
         deadline: bigint,
         signature: Uint8Array,
     ): Promise<ApproveBySignature>;
     setApprovalForAllBySignature(
-        owner: Address,
+        owner: Uint8Array,
+        ownerTweakedPublicKey: Uint8Array,
         operator: Address,
         approved: boolean,
         deadline: bigint,
